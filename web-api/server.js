@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 //connect to the database, mongod will automatically create a new database if it does not exist
-var db = mongoose.connect('mongodb://localhost/baby-app');
+var db = mongoose.connect('mongodb://localhost/learning-mongo');
 
 // "use" activates middleware, which means before a request reaches here, it goes through the middleware first
 
