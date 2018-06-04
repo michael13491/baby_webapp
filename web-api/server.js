@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 //connect to the database, mongod will automatically create a new database if it does not exist
 var db = mongoose.connect('mongodb://localhost/learning-mongo');
 
-var feedingTime = require('./model/feeding-time');
+var feedingTimeModel = require('./model/feeding-time');
 
 // "use" activates middleware, which means before a request reaches here, it goes through the middleware first
 
@@ -18,9 +18,28 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.get('/', function (request, response) {
-  response.send("into get req!");
+  feedingTimeModel.find({}, function(err, feedingTime) {
+    if (err) {
+      response.status(500).send("Could not get feeding time from DB");
+    } else {
+      response.status(200).send(feedingTime);
+    }
+  })
+//  response.send("into get req!");
 })
 
+app.post('/feeding-time', function (request, response) {
+  var feedingTime = new feedingTimeModel(); //creating a new mongoose js object
+  feedingTime.title = request.body.title;
+//  feedingTime.date = request.body.date;
+  feedingTime.save(function(err, savedFeedingTime) {
+    if (err) {
+      response.status(500).send({error: "could not save feeding time"});
+    } else {
+      response.status(200).send(savedFeedingTime);
+    }
+  })
+})
 app.listen(3000, function() {
   console.log("server running and listening to port 3000");
 })
