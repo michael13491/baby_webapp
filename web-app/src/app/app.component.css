@@ -1,0 +1,17 @@
+.main-bg {
+  background: #FFF;
+}
+
+.main-bg h1 {
+  text-align: center;
+}
+
+.testing {
+  background: #E44C4C;
+}
+
+.button-styles {
+  display: block;
+  margin: auto;
+  align-self: center;
+}
