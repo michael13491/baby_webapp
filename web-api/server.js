@@ -2,14 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-// const cors = require('cors')
 
-// var corsOptions = {
-//   origin: 'http://localhost:4200',
-//   optionsSuccessStatus: 200
-// }
-
-// app.use(cors(corsOptions));
 
 //Stolen from web dev course examples
 //Allow all requests from all domains & localhost
@@ -33,19 +26,16 @@ app.use(bodyParser.json());
 //only want to work with array and strings, rejects anything else
 app.use(bodyParser.urlencoded({extended: false})); 
 
+// example - removes '/' from /feeding
+remove_slash_from_url = function (url) {
+  return url.substring(1);
+}
 
-app.get('/all', function (request, response) {
-  feedingTimeModel.find({}, function(err, feedingTime) {
-    if (err) {
-      response.status(500).send("Could not get feeding time from DB");
-    } else {
-      response.status(200).send(feedingTime);
-    }
-  })
-})
-
-app.get('/', function (request, response) {
-  feedingTimeModel.find({}, null, {sort: {date: -1}, limit: 3}, function(err, feedingTime) {
+get_data_from_db =  function (request, response) {
+  console.log(request.url);
+  console.log(request.url.substring(1));
+  title = remove_slash_from_url(request.url);
+  feedingTimeModel.find({title: title}, null, {sort: {date: -1}, limit: 3}, function(err, feedingTime) {
     if (err) {
       response.status(500).send("Could not get feeding time from DB");
     } else {
@@ -56,11 +46,11 @@ app.get('/', function (request, response) {
       response.status(200).send(feeding_return);
     }
   })
-})
+};
 
-app.post('/feeding', function (request, response) {
+set_data_to_db = (request, response) => {
   var feedingTime = new feedingTimeModel(); //creating a new mongoose js object
-  // feedingTime.title = request.body.title;
+  feedingTime.title = remove_slash_from_url(request.url);
   feedingTime.date = Date();
 
   console.log("received post request")
@@ -72,7 +62,31 @@ app.post('/feeding', function (request, response) {
       response.status(200).send(savedFeedingTime.date);
     }
   })
+};
+
+//testing API call
+app.get('/all', function (request, response) {
+  feedingTimeModel.find({}, function(err, feedingTime) {
+    if (err) {
+      response.status(500).send("Could not get feeding time from DB");
+    } else {
+      response.status(200).send(feedingTime);
+    }
+  })
 })
+
+app.get('/feeding', get_data_from_db);
+app.post('/feeding', set_data_to_db);
+
+app.get('/poop', get_data_from_db);
+app.post('/poop', set_data_to_db);
+
+app.get('/bath', get_data_from_db);
+app.post('/bath', set_data_to_db);
+
+app.get('/sleep', get_data_from_db);
+app.post('/sleep', set_data_to_db);
+
 
 app.delete('/feeding', function (request, response) {
   feedingTimeModel.findByIdAndRemove({_id: request.body._id}, function(err, deletedFeedingTime) {

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-6 center-button">
+    <button type="button" class="feeding btn btn-primary btn-lg btn-block"
+  title="timestamp now" (click)="updateFeedingTime()">{{button_name}}</button>
+  </div>
+  <div class="col-sm-6 feeding-time">
+    <ul>
+      <li *ngFor="let time of feed_time">
+        <p>{{time}}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
