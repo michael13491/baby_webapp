@@ -14,9 +14,9 @@ app.all('/*', function(req, res, next) {
 });
 
 //connect to the database, mongod will automatically create a new database if it does not exist
-var db = mongoose.connect('mongodb://localhost/learning-mongo');
+var db = mongoose.connect('mongodb://localhost/eventTime');
 
-var feedingTimeModel = require('./model/feeding-time');
+var eventTimeModel = require('./model/eventTime');
 
 // "use" activates middleware, which means before a request reaches here, it goes through the middleware first
 
@@ -35,7 +35,7 @@ get_data_from_db =  function (request, response) {
   console.log(request.url);
   console.log(request.url.substring(1));
   title = remove_slash_from_url(request.url);
-  feedingTimeModel.find({title: title}, null, {sort: {date: -1}, limit: 3}, function(err, feedingTime) {
+  eventTimeModel.find({title: title}, null, {sort: {date: -1}, limit: 3}, function(err, feedingTime) {
     if (err) {
       response.status(500).send("Could not get feeding time from DB");
     } else {
@@ -49,7 +49,7 @@ get_data_from_db =  function (request, response) {
 };
 
 set_data_to_db = (request, response) => {
-  var feedingTime = new feedingTimeModel(); //creating a new mongoose js object
+  var feedingTime = new eventTimeModel(); //creating a new mongoose js object
   feedingTime.title = remove_slash_from_url(request.url);
   feedingTime.date = Date();
 
@@ -66,7 +66,7 @@ set_data_to_db = (request, response) => {
 
 //testing API call
 app.get('/all', function (request, response) {
-  feedingTimeModel.find({}, function(err, feedingTime) {
+  eventTimeModel.find({}, function(err, feedingTime) {
     if (err) {
       response.status(500).send("Could not get feeding time from DB");
     } else {
@@ -89,7 +89,7 @@ app.post('/sleep', set_data_to_db);
 
 
 app.delete('/feeding', function (request, response) {
-  feedingTimeModel.findByIdAndRemove({_id: request.body._id}, function(err, deletedFeedingTime) {
+  eventTimeModel.findByIdAndRemove({_id: request.body._id}, function(err, deletedFeedingTime) {
     if (err) {
       response.status(500).send({error: "could not delete feeding time"});
     } else {

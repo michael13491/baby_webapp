@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var feddingTimeSchema = new Schema({
+var eventTimeSchema = new Schema({
   title: String,
   date: {type: Date, default: Date()}
 });
 
-module.exports = mongoose.model('Feeding-time', feddingTimeSchema);
+module.exports = mongoose.model('eventTime', eventTimeSchema);
