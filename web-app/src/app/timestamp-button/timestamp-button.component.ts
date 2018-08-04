@@ -8,6 +8,7 @@ import { TimestampService } from '../timestamp.service';
   templateUrl: './timestamp-button.component.html',
   styleUrls: ['./timestamp-button.component.css']
 })
+
 // export class TimestampButtonComponent implements OnInit {
 export class TimestampButtonComponent implements OnInit {
   @Input() button_name: string;
@@ -23,15 +24,33 @@ export class TimestampButtonComponent implements OnInit {
 
   getFeedingTime(): void {
     this.timestampService.getDates(this.button_name)
-        .subscribe(feed_time => this.feed_time = feed_time);
+        .subscribe(eventTime => {
+          eventTime.map( time => this.feed_time.push(<any>moment(time).format("h:mm:ss a, ddd, MMM Do")));
+        });
   }
 
   updateFeedingTime() {
     this.timestampService.setDate(this.button_name).subscribe(
-        feed_time => {
-          this.feed_time.unshift(feed_time);
+        eventTime => {
+          this.feed_time.unshift(<any>moment(eventTime).format("h:mm:ss a, ddd, MMM Do"));
           this.feed_time.pop();
         }
     );
   }
+
+  getButtonIcon(eventType: string) {
+    switch (eventType) {
+      case 'feeding':
+        return '../../assets/baby_feeding.png';
+      case 'poop':
+        return '../../assets/baby_poop.png';
+      case 'bath':
+        return '../../assets/baby_bath.png';
+      case 'sleep':
+        return '../../assets/baby_sleep.png';
+      default:
+        return;
+    }
+  }
+
 }

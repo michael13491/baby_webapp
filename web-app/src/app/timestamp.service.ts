@@ -29,19 +29,19 @@ export class TimestampService {
   }
 
   /* actitivty can be feeding|poop|bath|sleep*/
-  getDates(activity_type: string): Observable<timestamp[]> {
+  getDates(activity_type: string): Observable<string[]> {
     this.log("fetched timestamps");
-    return this.http.get<timestamp[]>(this.serverUrl + activity_type)
+    return this.http.get<string[]>(this.serverUrl + activity_type)
                .pipe(
                  catchError(this.handleError('getDates', []))
                );
   }
 
-  setDate(activity_type: string): Observable<timestamp> {
+  setDate(activity_type: string): Observable<string> {
     this.log("updating timestamps");
-    return this.http.post<timestamp>(this.serverUrl + activity_type, null)
+    return this.http.post<string>(this.serverUrl + activity_type, null)
                .pipe(
-                 catchError(this.handleError<timestamp>('setDate'))
+                 catchError(this.handleError<string>('setDate'))
            );
   }
 
