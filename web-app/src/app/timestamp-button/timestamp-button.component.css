@@ -2,7 +2,7 @@
 .feeding-time {
   text-align: center;
   font-size: 1rem;
-  /* padding: px; */
+  padding-top: 10px ;
   margin: auto;
 }
 
@@ -14,4 +14,5 @@
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
