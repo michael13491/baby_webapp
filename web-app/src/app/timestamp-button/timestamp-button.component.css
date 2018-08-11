@@ -16,3 +16,21 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
+.timestamp_background {
+  background-color: rgb(255, 255, 255);
+}
+
+.rounded_left {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.rounded_right {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+img {
+  margin: 10px
+}

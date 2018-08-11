@@ -41,13 +41,13 @@ export class TimestampButtonComponent implements OnInit {
   getButtonIcon(eventType: string) {
     switch (eventType) {
       case 'feeding':
-        return '../../assets/baby_feeding.png';
+        return '../../assets/feed.png';
       case 'poop':
-        return '../../assets/baby_poop.png';
+        return '../../assets/poop.png';
       case 'bath':
-        return '../../assets/baby_bath.png';
+        return '../../assets/bath.png';
       case 'sleep':
-        return '../../assets/baby_sleep.png';
+        return '../../assets/sleep.png';
       default:
         return;
     }
