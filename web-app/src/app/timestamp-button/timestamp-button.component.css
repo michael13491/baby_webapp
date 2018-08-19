@@ -21,6 +21,10 @@ ul {
   background-color: rgb(255, 255, 255);
 }
 
+.border {
+  border-width: medium !important;
+}
+
 .rounded_left {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;

@@ -1,14 +1,12 @@
 <div class="row" style="margin: 10px; padding: 10px">
-  <div class="col-sm-2"></div>
+  <div class="col-sm-1"></div>
 
-  <div class="col-sm-8 border border-secondary rounded_left rounded_right timestamp_background">
+  <div class="col-sm-10 border border-secondary rounded_left rounded_right timestamp_background">
     <div class="row">
         <div class="col-sm-4 center-button">
             <a style="cursor: pointer" (click)="updateFeedingTime()">
               <img class="border border-secondary rounded" [src]="getButtonIcon(button_name)" height="80px" width="80px">
             </a>
-            <!-- <button type="button" class="feeding btn btn-primary btn-lg btn-block"
-          title="timestamp now" (click)="updateFeedingTime()">{{button_name}}</button> -->
           </div>
           <div class="col-sm-8 feeding-time">
             <ul>
@@ -25,7 +23,5 @@
     </div>
   </div>
 
-
-
-  <div class="col-sm-2"></div>
+  <div class="col-sm-1"></div>
 </div>
