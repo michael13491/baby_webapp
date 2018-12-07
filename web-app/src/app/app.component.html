@@ -2,6 +2,7 @@
 
 
 <div class="container-fluid main-bg">
+
   <div class="row">
     <div class="col border border-secondary h1_bg">
       <h1>
@@ -9,13 +10,9 @@
       </h1>
     </div>
   </div>
-  
-  <div>
-    <app-timestamp-button [button_name]="'feeding'"></app-timestamp-button>
-    <app-timestamp-button [button_name]="'poop'"></app-timestamp-button>
-    <app-timestamp-button [button_name]="'bath'"></app-timestamp-button>
-    <app-timestamp-button [button_name]="'sleep'"></app-timestamp-button>
-  </div>
+
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
 
 </div>
 
