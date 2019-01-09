@@ -9,8 +9,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { GroceryListComponent } from './grocery-list/grocery-list.component';
-import {appRoutes} from "./app.routes";
+import {appRoutes} from './app.routes';
 import { TimeTrackerComponent } from './time-tracker/time-tracker.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TimeTrackerComponent } from './time-tracker/time-tracker.component';
   imports: [
     RouterModule.forRoot(appRoutes, { enableTracing: true}),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

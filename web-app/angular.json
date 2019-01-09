@@ -23,6 +23,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/todomvc-app-css/index.css",
+              "node_modules/todomvc-common/base.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
