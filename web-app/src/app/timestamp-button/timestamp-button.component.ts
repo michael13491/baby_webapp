@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { timestamp } from '../timestamp';
 import * as moment from 'moment';
-import { TimestampService } from '../timestamp.service';
+import { TimestampService } from '../services/timestamp.service';
 
 @Component({
   selector: 'app-timestamp-button',

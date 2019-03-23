@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TEST_TIME } from './test-dates';
+import { TEST_TIME } from '../test-dates';
 import { Observable, of } from 'rxjs';
-import { timestamp } from './timestamp';
+import { timestamp } from '../timestamp';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
