@@ -12,6 +12,7 @@ import { GroceryListComponent } from './grocery-list/grocery-list.component';
 import {appRoutes} from './app.routes';
 import { TimeTrackerComponent } from './time-tracker/time-tracker.component';
 import {FormsModule} from '@angular/forms';
+import {FirebaseDataStorage} from './services/firebase-data-storage';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import {FormsModule} from '@angular/forms';
     TimeTrackerComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true}),
+    // enabling tracing option for debugging routes
+    // RouterModule.forRoot(appRoutes, { enableTracing: true}),
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [FirebaseDataStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

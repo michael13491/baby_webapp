@@ -7,27 +7,44 @@ import {Todo} from '../todo';
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.css']
 })
-export class ToDoListComponent {
+export class ToDoListComponent implements OnInit{
 
-  newTodo: Todo = new Todo();
+  public newTodo = '';
+  public todos: Todo[];
 
   constructor(private todoDataService: TodoDataService) {
   }
 
-  addTodo() {
-    this.todoDataService.addTodo(this.newTodo);
-    this.newTodo = new Todo();
+  async ngOnInit(): Promise<void> {
+    this.todos = await this.todoDataService.getAllTodosFromDatabase();
   }
 
-  toggleTodoComplete(todo) {
-    this.todoDataService.toggleTodoComplete(todo);
+  async addTodo() {
+    const todo: Todo = new Todo({title: this.newTodo});
+    await this.todoDataService.addTodo(todo);
+
+    this.updateTodos();
+
+    this.newTodo = '';
+
   }
 
-  removeTodo(todo) {
-    this.todoDataService.deleteTodoById(todo.id);
+  async toggleTodoComplete(todo) {
+    await this.todoDataService.toggleTodoComplete(todo);
+    this.updateTodos();
   }
 
-  get todos() {
-    return this.todoDataService.getAllTodos();
+  async removeTodo(todo) {
+    await this.todoDataService.deleteTodoByKey(todo.key);
+
+    this.updateTodos();
+  }
+
+  updateTodos() {
+    this.todos = this.todoDataService.getAllTodos();
+  }
+
+  incompleteTodos(): number {
+    return this.todos.filter( todo => todo.complete === false).length;
   }
 }
