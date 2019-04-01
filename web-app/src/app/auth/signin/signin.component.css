@@ -1,0 +1,19 @@
+.signin-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-container > * {
+  width: 100%;
+}
+
+.icon-size {
+  font-size: 96px;
+  height: 96px;
+  width: 100%;
+
+}
+
+.signin-card-padding {
+  margin-top: 20px;
+}

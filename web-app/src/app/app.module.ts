@@ -13,6 +13,11 @@ import {appRoutes} from './app.routes';
 import { TimeTrackerComponent } from './time-tracker/time-tracker.component';
 import {FormsModule} from '@angular/forms';
 import {FirebaseDataStorage} from './services/firebase-data-storage';
+import { SigninComponent } from './auth/signin/signin.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule, MatCardModule, MatIconModule, MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,8 @@ import {FirebaseDataStorage} from './services/firebase-data-storage';
     NavbarComponent,
     ToDoListComponent,
     GroceryListComponent,
-    TimeTrackerComponent
+    TimeTrackerComponent,
+    SigninComponent
   ],
   imports: [
     // enabling tracing option for debugging routes
@@ -30,7 +36,14 @@ import {FirebaseDataStorage} from './services/firebase-data-storage';
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [FirebaseDataStorage],
   bootstrap: [AppComponent]
