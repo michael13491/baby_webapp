@@ -1,0 +1,37 @@
+.footer {
+  height: 40px;
+}
+
+//h1 {
+//  font-size: 3rem;
+//}
+
+@media(max-width: 480px) {
+
+  .todoapp {
+    margin: 50px 0 50px 0;
+  }
+
+  .new-todo {
+    padding: 10px 5px 10px 15px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    top: -58px;
+  }
+
+  label {
+    margin-bottom: 0px;
+  }
+
+  li label {
+    padding: 5px 15px 5px 15px;
+  }
+
+  .todo-list li:hover .destroy {
+    margin-top: -5px;
+    width: 30px;
+    height: 30px;
+  }
+}
