@@ -5,27 +5,30 @@
       <mat-icon class="icon-size text-center">tag_faces</mat-icon>
     </div>
   </div>
-  <div class="signin-container">
+
+  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="signin-container">
     <mat-form-field>
-      <input matInput placeholder="Email" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <input matInput placeholder="Email" formControlName="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password" required>
+      <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
       <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
         <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="password.invalid">{{getErrorMessage(password)}}</mat-error>
     </mat-form-field>
 
-  </div>
+    <div class="row">
+      <div class="col-3 offset-3 text-center">
+        <button type="submit" [disabled]="!signinForm.valid" mat-raised-button color="primary">Sign In</button>
+      </div>
+      <div class="col-3 text-center">
+        <button (click)="onCancel()" mat-raised-button color="accent">Cancel</button>
+      </div>
+    </div>
+  </form>
 
-  <div class="row">
-    <div class="col-3 offset-3 text-center">
-      <button mat-raised-button color="primary">Sign In</button>
-    </div>
-    <div class="col-3 text-center">
-      <button mat-raised-button color="accent">Cancel</button>
-    </div>
-  </div>
+
 </mat-card>
