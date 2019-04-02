@@ -1,7 +1,20 @@
 <nav class="navbar navbar-dark bg-dark">
-    <!--<a routerLink="/home" class="navbar-brand" routerLinkActive="active">Home</a>-->
-    <a routerLink="/todolist" class="navbar-brand" routerLinkActive="active">To-Do List</a>
-    <!--<a routerLink="/grocery" class="navbar-brand">Grocery List</a>-->
-    <a routerLink="/signin" class="navbar-brand">Sign In</a>
+  <ul class="navbar-nav" *ngIf="authService.isAuthenticated()">
+    <li class="nav-item">
+      <a routerLink="/todolist" class="navbar-brand" routerLinkActive="active">To-Do List</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto" >
+    <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+      <a routerLink="/signin" class="navbar-brand">Login</a>
+    </li>
+    <li class="nav-item navbar-brand" *ngIf="authService.isAuthenticated()">
+      <a class="navbar-brand" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+    </li>
+  </ul>
+
+  <!--<a routerLink="/home" class="navbar-brand" routerLinkActive="active">Home</a>-->
+  <!--<a routerLink="/grocery" class="navbar-brand">Grocery List</a>-->
 </nav>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +16,7 @@ export class SigninComponent implements OnInit {
 
   public hidePassword = true;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -27,8 +28,11 @@ export class SigninComponent implements OnInit {
         '';
   }
 
-  onSubmit() {
-    console.log(this.signinForm.value);
+  onSignIn() {
+    const email = this.email.value;
+    const password = this.password.value;
+    console.log(email, password);
+    this.authService.signinUser(email, password);
   }
 
   onCancel() {

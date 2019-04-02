@@ -17,3 +17,7 @@
 .signin-card-padding {
   margin-top: 20px;
 }
+
+.hidepassword-icon-size {
+  font-size: inherit;
+}

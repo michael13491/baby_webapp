@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="signin-container">
+  <form [formGroup]="signinForm" (ngSubmit)="onSignIn()" class="signin-container">
     <mat-form-field>
       <input matInput placeholder="Email" formControlName="email" required>
       <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
@@ -14,9 +14,9 @@
 
     <mat-form-field>
       <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
+      <i matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon class="hidepassword-icon-size">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </i>
       <mat-error *ngIf="password.invalid">{{getErrorMessage(password)}}</mat-error>
     </mat-form-field>
 

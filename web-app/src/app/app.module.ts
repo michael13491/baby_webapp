@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {Router, RouterModule, Routes} from '@angular/router';
+import { NgModule} from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule, MatCardModule, MatIconModule, MatInputModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthGuard} from './services/auth-guard.service';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatCardModule
   ],
-  providers: [FirebaseDataStorage],
+  providers: [FirebaseDataStorage, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

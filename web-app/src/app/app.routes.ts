@@ -3,14 +3,15 @@ import {GroceryListComponent} from './grocery-list/grocery-list.component';
 import {Routes} from '@angular/router';
 import {TimeTrackerComponent} from './time-tracker/time-tracker.component';
 import {SigninComponent} from './auth/signin/signin.component';
+import {AuthGuard} from "./services/auth-guard.service";
 
 export const appRoutes: Routes = [
-  { path: 'todolist', component: ToDoListComponent },
+  { path: 'todolist', component: ToDoListComponent, canActivate: [AuthGuard] },
   { path: 'grocery', component: GroceryListComponent },
   { path: 'home', component: TimeTrackerComponent },
   { path: 'signin', component: SigninComponent},
   { path: '',
-    redirectTo: '/signin',
+    redirectTo: 'signin',
     pathMatch: 'full'
   },
   { path: '**', component: SigninComponent }
