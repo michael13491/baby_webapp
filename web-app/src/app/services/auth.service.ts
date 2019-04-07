@@ -11,27 +11,23 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  signinUser(email: string, password: string) {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(
-        response => {
-          console.log(response);
-          firebase.auth().currentUser.getIdToken()
-            .then(
-              (token: string) => this.token = token
-            );
-          this.router.navigate(['todolist']);
-        }
-      )
-      .catch(
-        error => console.log(error)
-      );
+  async signinUser(email: string, password: string) {
+    try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      const token = await firebase.auth().currentUser.getIdToken();
+      this.token = token;
+      this.router.navigate(['todolist']);
+    } catch (e) {
+      console.log('sign in auth error', e);
+    }
   }
 
-  getTokenId() {
-    firebase.auth().currentUser.getIdToken()
-      .then( token => this.token = token);
-
+  async getTokenId(): Promise<string> {
+    if (firebase.auth().currentUser) {
+      this.token = await firebase.auth().currentUser.getIdToken();
+    }
     return this.token;
   }
 
@@ -42,5 +38,17 @@ export class AuthService {
 
   isAuthenticated() {
     return this.token != null;
+  }
+
+  async setToken(user: firebase.User) {
+    if (!user) {
+      return;
+    }
+
+    const token = await user.getIdToken();
+
+    if (token) {
+      this.token = token;
+    }
   }
 }

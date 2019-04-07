@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import * as firebase from 'firebase';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -16,9 +18,16 @@ export class SigninComponent implements OnInit {
 
   public hidePassword = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    firebase.auth().onAuthStateChanged(
+      async (user) => {
+        await this.authService.setToken(user);
+        this.router.navigate(['todolist']);
+      }
+    );
   }
 
 
@@ -31,7 +40,6 @@ export class SigninComponent implements OnInit {
   onSignIn() {
     const email = this.email.value;
     const password = this.password.value;
-    console.log(email, password);
     this.authService.signinUser(email, password);
   }
 
