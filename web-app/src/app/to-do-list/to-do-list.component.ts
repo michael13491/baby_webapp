@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TodoDataService} from '../services/todo-data.service';
 import {Todo} from '../todo';
+import {DataStorageType} from '../services/firebase-data-storage';
 
 @Component({
   selector: 'app-to-do-list',
@@ -16,12 +17,12 @@ export class ToDoListComponent implements OnInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.todos = await this.todoDataService.getAllTodosFromDatabase();
+    this.todos = await this.todoDataService.getAllTodosFromDatabase(DataStorageType.toDoList);
   }
 
   async addTodo() {
     const todo: Todo = new Todo({title: this.newTodo});
-    await this.todoDataService.addTodo(todo);
+    await this.todoDataService.addTodo(todo, DataStorageType.toDoList);
 
     this.updateTodos();
 
@@ -30,12 +31,12 @@ export class ToDoListComponent implements OnInit{
   }
 
   async toggleTodoComplete(todo) {
-    await this.todoDataService.toggleTodoComplete(todo);
+    await this.todoDataService.toggleTodoComplete(todo, DataStorageType.toDoList);
     this.updateTodos();
   }
 
   async removeTodo(todo) {
-    await this.todoDataService.deleteTodoByKey(todo.key);
+    await this.todoDataService.deleteTodoByKey(todo.key, DataStorageType.toDoList);
 
     this.updateTodos();
   }

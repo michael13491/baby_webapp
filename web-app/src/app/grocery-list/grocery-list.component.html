@@ -1,3 +1,42 @@
-<p>
-  grocery-list works!
-</p>
+
+
+<div class="row">
+  <div class="col-sm-12 ">
+    <section class="todoapp">
+      <header class="header">
+        <h1>Grocery list</h1>
+        <div class="new-todo">
+          <div class="row m-0">
+            <div class="col-7 px-1">
+              <input class="new-todo" placeholder="Yum Yum Yum" autofocus="" [(ngModel)]="newGrocery" (keyup.enter)="addGrocery()" required>
+            </div>
+            <div class="col-2 px-1 py-0 m-auto">
+              <input class="form-control" type="number" placeholder="1" [(ngModel)]="quantity" (keyup.enter)="addGrocery()">
+            </div>
+            <div class="col-3 px-1 py-0 m-auto">
+              <select class="form-control" [(ngModel)]="unit">
+                <option>px</option>
+                <option>kg</option>
+                <option>litre</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="main" *ngIf="groceryList?.length > 0">
+        <ul class="todo-list">
+          <li *ngFor="let grocery of groceryList" [class.completed]="grocery.complete">
+            <div class="view">
+              <label (click)="toggleGroceryComplete(grocery)">{{grocery.title}}</label>
+              <button class="destroy" (click)="removeGrocery(grocery)"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <footer class="footer" *ngIf="groceryList?.length > 0">
+        <span class="todo-count"><strong>{{incompleteGroceries()}}</strong> {{groceryList?.length == 1 ? 'item' : 'items'}} left</span>
+      </footer>
+    </section>
+
+  </div>
+</div>
