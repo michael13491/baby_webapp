@@ -7,7 +7,7 @@ import {AuthGuard} from './services/auth-guard.service';
 
 export const appRoutes: Routes = [
   { path: 'todolist', component: ToDoListComponent, canActivate: [AuthGuard] },
-  { path: 'grocery', component: GroceryListComponent, canActivate: [AuthGuard] },
+  { path: 'groceries', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'home', component: TimeTrackerComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent},
   { path: '',

@@ -1,7 +1,10 @@
 <nav class="navbar navbar-dark bg-dark">
-  <ul class="navbar-nav" *ngIf="authService.isAuthenticated()">
+  <ul class="navbar-nav mr-auto" *ngIf="authService.isAuthenticated()">
     <li class="nav-item">
-      <a routerLink="/todolist" class="navbar-brand" routerLinkActive="active">To-Do List</a>
+      <a routerLink="/todolist" class="navbar-brand nav-link" routerLinkActive="active">To-Do</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/groceries" class="navbar-brand nav-link">Groceries</a>
     </li>
   </ul>
 
