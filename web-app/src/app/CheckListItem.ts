@@ -1,4 +1,4 @@
-export class Todo {
+export class CheckListItem {
   id: number;
   title: string = '';
   complete: boolean = false;
