@@ -49,6 +49,8 @@ export class ChecklistDataService {
         this.checkList[i].key = keys[i];
       }
       this.checkList.reverse();
+    } else {
+      this.checkList = [];
     }
 
     return this.checkList;
