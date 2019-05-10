@@ -18,24 +18,25 @@ export class TimestampButtonComponent implements OnInit {
   constructor(private timestampService: TimestampService) {
   }
 
-  ngOnInit () {
-    this.getFeedingTime();
+  async ngOnInit () {
+    await this.getFeedingTime();
   }
 
-  getFeedingTime(): void {
-    this.timestampService.getDates(this.button_name)
-        .subscribe(eventTime => {
-          eventTime.map( time => this.feed_time.push(<any>moment(time).format("h:mm:ss a, ddd, MMM Do")));
-        });
-  }
-
-  updateFeedingTime() {
-    this.timestampService.setDate(this.button_name).subscribe(
-        eventTime => {
-          this.feed_time.unshift(<any>moment(eventTime).format("h:mm:ss a, ddd, MMM Do"));
-          this.feed_time.pop();
-        }
+  async getFeedingTime() {
+    const dates = await this.timestampService.getDates(this.button_name);
+    Object.values(dates).reverse().map(
+      (time) => {
+        this.feed_time.push(<any>moment(time).format('h:mm:ss a, ddd, MMM Do'));
+      }
     );
+  }
+
+  async updateFeedingTime() {
+    const dateNow = Date.now();
+    await this.timestampService.setDate(this.button_name, dateNow);
+
+    this.feed_time.unshift(<any>moment(dateNow).format('h:mm:ss a, ddd, MMM Do'));
+    this.feed_time.pop();
   }
 
   getButtonIcon(eventType: string) {
