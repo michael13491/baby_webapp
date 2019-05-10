@@ -37,4 +37,16 @@ export class FirebaseDataStorage {
     return this.http.patch(`${this.serverUrl}${dataType}/${key}.json?auth=${token}`, newData).toPromise();
   }
 
+  setTimeStampData(dataType: DataStorageType, category: string, data: any) {
+    const token = this.authService.token;
+
+    return this.http.post(`${this.serverUrl}${dataType}/${category}.json?auth=${token}`, data).toPromise();
+  }
+
+  getTimeStampData(dataType: DataStorageType, category: string) {
+    const token = this.authService.token;
+
+    return this.http.get(`${this.serverUrl}${dataType}/${category}.json?orderBy="$key"&limitToLast=3&auth=${token}`).toPromise();
+  }
+
 }
