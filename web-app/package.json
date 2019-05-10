@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "deploy_test": "rm -rf public/* && mv dist/web-app/* public/ && firebase serve",
-    "deploy": "rm -rf public/* && mv dist/web-app/* public/ && firebase deploy",
+    "publish": "rm -rf public/* && mv dist/web-app/* public/",
+    "deploy_test": "firebase serve",
+    "deploy": "firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
