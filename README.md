@@ -5,4 +5,4 @@ Small web application project for use at home.
 Features:
 * To do list
 * Grocery list
-* baby activity time stamping system
+* activity time stamping system
