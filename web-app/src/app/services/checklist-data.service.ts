@@ -6,16 +6,11 @@ import {DataStorageType, FirebaseDataStorage} from './firebase-data-storage';
   providedIn: 'root'
 })
 export class ChecklistDataService {
-
-  lastId = 0;
   checkList: CheckListItem[] = [];
 
   constructor(private firebaseData: FirebaseDataStorage) { }
 
   async addItem(item: CheckListItem, type: DataStorageType) {
-    if (!item.id) {
-      item.id = ++this.lastId;
-    }
 
     // database returns {name: "key"}
     const resultKeyObject = await this.firebaseData.addData(type, item);
@@ -28,10 +23,10 @@ export class ChecklistDataService {
     return item;
   }
 
-  async deleteItemByKey(key: string, type: DataStorageType) {
-    await this.firebaseData.deleteData(type, key);
+  deleteItemByKey(key: string, type: DataStorageType) {
     const index = this.checkList.findIndex(checkListItem => checkListItem.key === key);
     this.checkList.splice(index, 1);
+    this.firebaseData.deleteData(type, key).catch(error => console.log(error));
   }
 
 
@@ -57,10 +52,12 @@ export class ChecklistDataService {
   }
 
   // Toggle item complete
-  async toggleItemComplete(item: CheckListItem, type: DataStorageType) {
-    await this.firebaseData.patchData(type, item.key, {complete: !item.complete});
+  public toggleItemComplete(item: CheckListItem, type: DataStorageType) {
     const index = this.checkList.findIndex(checkListItem => checkListItem.key === item.key);
     this.checkList[index].complete = !this.checkList[index].complete;
+    this.firebaseData.patchData(type, item.key, {complete: this.checkList[index].complete}).catch(
+      (error) => console.log(error)
+    );
   }
 
 }

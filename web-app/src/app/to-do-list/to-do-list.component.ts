@@ -30,12 +30,12 @@ export class ToDoListComponent implements OnInit {
 
   }
 
-  async toggleTodoComplete(todo) {
+  async toggleTodoComplete(todo: CheckListItem) {
     await this.checklistDataService.toggleItemComplete(todo, DataStorageType.toDoList);
     this.updateTodos();
   }
 
-  async removeTodo(todo) {
+  async removeTodo(todo: CheckListItem) {
     await this.checklistDataService.deleteItemByKey(todo.key, DataStorageType.toDoList);
 
     this.updateTodos();
